@@ -1,0 +1,29 @@
+{
+  "schemaVersion": 1,
+  "id": "videoeditor",
+  "version": "${version}",
+  "name": "Minecraft Video Editor",
+  "description": "A video editing mod for Minecraft",
+  "authors": [
+    "YourName"
+  ],
+  "contact": {},
+  "license": "MIT",
+  "icon": "assets/videoeditor/icon.png",
+  "environment": "client",
+  "entrypoints": {
+    "client": [
+      "com.videoeditor.VideoEditorMod"
+    ]
+  },
+  "mixins": [
+    "videoeditor.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": ">=0.16.0",
+    "minecraft": "~1.21.4",
+    "java": ">=21",
+    "fabric-api": "*"
+  }
+}
+
