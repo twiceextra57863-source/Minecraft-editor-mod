@@ -43,6 +43,38 @@ public class EditorScreen extends Screen {
             initNormalMode();
         }
     }
+
+    private void handleRightClick(double mouseX, double mouseY) {
+    int timelineY = PREVIEW_HEIGHT + CONTROL_BAR_HEIGHT + 70;
+    int clipWidth = 180;  // Updated
+    int clipHeight = 70;   // Updated
+    int spacing = 15;
+    int clipsPerRow = Math.max(1, (this.width - 60) / (clipWidth + spacing));
+    
+    int clipX = 30;
+    int clipY = timelineY - timelineScrollOffset;
+    
+    for (int i = 0; i < project.getClips().size(); i++) {
+        if (mouseX >= clipX && mouseX <= clipX + clipWidth &&
+            mouseY >= clipY && mouseY <= clipY + clipHeight &&
+            clipY >= timelineY && clipY < timelineY + TIMELINE_HEIGHT_NORMAL - 60) {
+            
+            // Open context menu (not editor)
+            if (this.client != null) {
+                this.client.setScreen(new ClipContextMenu(this, project, 
+                    project.getClips().get(i), i));
+            }
+            return;
+        }
+        
+        if ((i + 1) % clipsPerRow == 0) {
+            clipX = 30;
+            clipY += clipHeight + spacing;
+        } else {
+            clipX += clipWidth + spacing;
+        }
+      }
+    }
     
     private void initNormalMode() {
         int controlY = PREVIEW_HEIGHT + 10;
@@ -569,30 +601,30 @@ public class EditorScreen extends Screen {
     }
     
     private void handleClipSelection(double mouseX, double mouseY) {
-        int timelineY = PREVIEW_HEIGHT + CONTROL_BAR_HEIGHT + 70;
-        int clipWidth = 140;
-        int clipHeight = 100;
-        int spacing = 15;
-        int clipsPerRow = Math.max(1, (this.width - 60) / (clipWidth + spacing));
-        
-        int clipX = 30;
-        int clipY = timelineY - timelineScrollOffset;
-        
-        for (int i = 0; i < project.getClips().size(); i++) {
-            if (mouseX >= clipX && mouseX <= clipX + clipWidth &&
-                mouseY >= clipY && mouseY <= clipY + clipHeight &&
-                clipY >= timelineY && clipY < timelineY + TIMELINE_HEIGHT_NORMAL - 60) {
-                selectedClipIndex = i;
-                return;
-            }
-            
-            if ((i + 1) % clipsPerRow == 0) {
-                clipX = 30;
-                clipY += clipHeight + spacing;
-            } else {
-                clipX += clipWidth + spacing;
-            }
+    int timelineY = PREVIEW_HEIGHT + CONTROL_BAR_HEIGHT + 70;
+    int clipWidth = 180;  // Updated
+    int clipHeight = 70;   // Updated
+    int spacing = 15;
+    int clipsPerRow = Math.max(1, (this.width - 60) / (clipWidth + spacing));
+    
+    int clipX = 30;
+    int clipY = timelineY - timelineScrollOffset;
+    
+    for (int i = 0; i < project.getClips().size(); i++) {
+        if (mouseX >= clipX && mouseX <= clipX + clipWidth &&
+            mouseY >= clipY && mouseY <= clipY + clipHeight &&
+            clipY >= timelineY && clipY < timelineY + TIMELINE_HEIGHT_NORMAL - 60) {
+            selectedClipIndex = i;
+            return;
         }
+        
+        if ((i + 1) % clipsPerRow == 0) {
+            clipX = 30;
+            clipY += clipHeight + spacing;
+        } else {
+            clipX += clipWidth + spacing;
+        }
+      }
     }
     
     @Override
