@@ -4,9 +4,7 @@
   "version": "${version}",
   "name": "Minecraft Video Editor",
   "description": "A video editing mod for Minecraft",
-  "authors": [
-    "YourName"
-  ],
+  "authors": ["Twicefear"],
   "contact": {},
   "license": "MIT",
   "icon": "assets/videoeditor/icon.png",
@@ -16,9 +14,6 @@
       "com.videoeditor.VideoEditorMod"
     ]
   },
-  "mixins": [
-    "videoeditor.mixins.json"
-  ],
   "depends": {
     "fabricloader": ">=0.16.0",
     "minecraft": "~1.21.4",
@@ -26,4 +21,3 @@
     "fabric-api": "*"
   }
 }
-
