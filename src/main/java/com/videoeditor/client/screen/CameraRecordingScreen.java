@@ -214,7 +214,7 @@ public class CameraRecordingScreen extends Screen {
         }
     }
     
-    private void clearAndInit() {
+    protected void clearAndInit() {
         this.clearChildren();
         this.init();
     }
