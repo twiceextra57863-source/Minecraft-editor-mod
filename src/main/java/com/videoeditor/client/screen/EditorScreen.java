@@ -440,44 +440,63 @@ public class EditorScreen extends Screen {
     }
     
     private void renderClipBox(DrawContext context, Clip clip, int x, int y, int width, int height, boolean selected) {
-        // Clip background
-        int bgColor = getClipColor(clip.getType());
-        context.fill(x, y, x + width, y + height, selected ? 0xFF4444FF : bgColor);
-        
-        // Border
-        int borderColor = selected ? 0xFFFFFF00 : 0xFF555555;
-        context.drawBorder(x, y, width, height, borderColor);
-        
-        if (selected) {
-            context.drawBorder(x - 1, y - 1, width + 2, height + 2, 0xFFFFFF00);
-            context.drawBorder(x - 2, y - 2, width + 4, height + 4, 0x88FFFF00);
-        }
-        
-        // Icon
-        String icon = getClipIcon(clip.getType());
-        context.drawCenteredTextWithShadow(this.textRenderer, icon, x + width / 2, y + 8, 0xFFFFFF);
-        
-        // Name
-        String name = clip.getName();
-        if (name.length() > 16) name = name.substring(0, 16) + "...";
-        context.drawTextWithShadow(this.textRenderer, name, x + 5, y + 28, 0xFFFFFF);
-        
-        // Type
-        context.drawTextWithShadow(this.textRenderer, clip.getType().toString(), x + 5, y + 42, 0xAAAAAA);
-        
-        // Duration
-        context.drawTextWithShadow(this.textRenderer, 
-            String.format("%.1fs", clip.getDuration() / 1000.0), x + 5, y + 56, 0x888888);
-        
-        // Frame count
-        context.drawTextWithShadow(this.textRenderer, 
-            clip.getFrames().size() + " frames", x + 5, y + 70, 0x666666);
-        
-        // Effects badge
-        if (clip.getFrames().size() > 10) {
-            context.drawTextWithShadow(this.textRenderer, "✨ FX", x + 5, y + 84, 0xFFFF00);
-        }
+    // Deep professional colors
+    int bgColor = switch (clip.getType()) {
+        case CAMERA -> selected ? 0xFF3A3A6A : 0xFF1A1A4A;      // Deep blue
+        case SCREEN_RECORDING -> selected ? 0xFF6A3A3A : 0xFF4A1A1A;  // Deep red
+        case IMAGE -> selected ? 0xFF3A6A3A : 0xFF1A4A1A;       // Deep green
+    };
+    
+    context.fill(x, y, x + width, y + height, bgColor);
+    
+    // Gradient effect (top lighter)
+    context.fill(x, y, x + width, y + 2, 0x44FFFFFF);
+    
+    // Border
+    int borderColor = selected ? 0xFFFFD700 : 0xFF555555;
+    context.drawBorder(x, y, width, height, borderColor);
+    
+    if (selected) {
+        // Glow effect
+        context.drawBorder(x - 1, y - 1, width + 2, height + 2, 0xFFFFD700);
+        context.drawBorder(x - 2, y - 2, width + 4, height + 4, 0x88FFD700);
     }
+    
+    // Icon (left side)
+    String icon = getClipIcon(clip.getType());
+    context.drawTextWithShadow(this.textRenderer, icon, x + 8, y + height / 2 - 4, 0xFFFFFF);
+    
+    // Name (center-left)
+    String name = clip.getName();
+    if (name.length() > 20) name = name.substring(0, 20) + "...";
+    context.drawTextWithShadow(this.textRenderer, name, x + 30, y + 10, 0xFFFFFF);
+    
+    // Duration bar (bottom)
+    int barWidth = (int)(width * 0.8);
+    int barX = x + 30;
+    int barY = y + height - 15;
+    context.fill(barX, barY, barX + barWidth, barY + 3, 0x44FFFFFF);
+    
+    // Type badge (right)
+    String typeBadge = clip.getType().toString().substring(0, 3);
+    context.drawTextWithShadow(this.textRenderer, typeBadge, 
+                              x + width - 35, y + 10, 0xFFFF00);
+    
+    // Duration text
+    context.drawTextWithShadow(this.textRenderer, 
+        String.format("%.1fs", clip.getDuration() / 1000.0), 
+        x + 30, y + height - 25, 0xAAAAAA);
+    
+    // Frame count (small)
+    context.drawTextWithShadow(this.textRenderer, 
+        clip.getFrames().size() + "f", x + width - 30, y + height - 12, 0x666666);
+    
+    // Right-click hint
+    if (selected) {
+        context.drawTextWithShadow(this.textRenderer, "Right-click: Edit", 
+                                 x + width / 2 - 40, y + height - 8, 0xFFFF00);
+    }
+}
     
     private void renderTimeRuler(DrawContext context, int x, int y, int width) {
         for (int i = 0; i <= 20; i++) {
