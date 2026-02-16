@@ -244,7 +244,7 @@ public class EditorScreen extends Screen {
         return super.mouseClicked(mouseX, mouseY, button);
     }
     
-    private void clearAndInit() {
+    protected void clearAndInit() {
         this.clearChildren();
         this.init();
     }
