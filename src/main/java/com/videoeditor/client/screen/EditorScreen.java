@@ -514,7 +514,7 @@ public class EditorScreen extends Screen {
         return switch (type) {
             case CAMERA -> 0xFF2A2A5A;
             case SCREEN_RECORDING -> 0xFF5A2A2A;
-             case IMAGE -> 0xFF2A5A2A;
+            case IMAGE -> 0xFF2A5A2A;
         };
     }
     
@@ -595,50 +595,5 @@ public class EditorScreen extends Screen {
     @Override
     public boolean shouldPause() {
         return !isPreviewFullscreen;
-    }
-    
-@Override
-public boolean mouseClicked(double mouseX, double mouseY, int button) {
-    if (button == 1 && !isPreviewFullscreen && !isTimelineFullscreen) {
-        // Right click - open clip editor
-        handleRightClick(mouseX, mouseY);
-        return true;
-    }
-    
-    if (!isPreviewFullscreen && !isTimelineFullscreen) {
-        handleClipSelection(mouseX, mouseY);
-    }
-    return super.mouseClicked(mouseX, mouseY, button);
-}
-
-private void handleRightClick(double mouseX, double mouseY) {
-    int timelineY = PREVIEW_HEIGHT + CONTROL_BAR_HEIGHT + 70;
-    int clipWidth = 140;
-    int clipHeight = 100;
-    int spacing = 15;
-    int clipsPerRow = Math.max(1, (this.width - 60) / (clipWidth + spacing));
-    
-    int clipX = 30;
-    int clipY = timelineY - timelineScrollOffset;
-    
-    for (int i = 0; i < project.getClips().size(); i++) {
-        if (mouseX >= clipX && mouseX <= clipX + clipWidth &&
-            mouseY >= clipY && mouseY <= clipY + clipHeight &&
-            clipY >= timelineY && clipY < timelineY + TIMELINE_HEIGHT_NORMAL - 60) {
-            
-            // Open clip editor
-            if (this.client != null) {
-                this.client.setScreen(new TimelineClipEditor(this, project, 
-                    project.getClips().get(i), i));
-            }
-            return;
-        }
-        
-        if ((i + 1) % clipsPerRow == 0) {
-            clipX = 30;
-            clipY += clipHeight + spacing;
-        } else {
-            clipX += clipWidth + spacing;
-        }
     }
 }
