@@ -4,9 +4,7 @@
   "package": "com.videoeditor.mixin",
   "compatibilityLevel": "JAVA_21",
   "mixins": [],
-  "client": [
-    "MinecraftClientMixin"
-  ],
+  "client": [],
   "injectors": {
     "defaultRequire": 1
   }
