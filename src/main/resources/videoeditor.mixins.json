@@ -5,7 +5,6 @@
   "plugin": "com.videoeditor.mixin.VideoEditorMixinPlugin",
   "compatibilityLevel": "JAVA_21",
   "mixins": [
-    "VideoEditorMixinPlugin",
     "core.BufferBuilderMixin",
     "world.LightingEngineMixin",
     "world.ChunkUpdateMixin",
