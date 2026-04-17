@@ -1,26 +1,21 @@
 {
   "schemaVersion": 1,
-  "id": "fpsbooster",
+  "id": "ultraboost",
   "version": "${version}",
-  "name": "FPS Booster Mod",
-  "description": "Unlock unlimited FPS and optimize Minecraft rendering for 400+ FPS on mobile/pc",
-  "authors": ["twicefear"],
-  "contact": {},
-  "license": "MIT",
-  "icon": "assets/fpsbooster/icon.png",
-  "environment": "client",
+  "name": "UltraBoost",
+  "description": "Vulkan-like performance optimization mod",
+  "authors": ["You"],
   "entrypoints": {
     "main": [
-      "com.yourname.fpsbooster.FPSBoosterMod"
+      "com.ultraboost.UltraBoostMod"
     ]
   },
   "mixins": [
-    "mixins.fpsbooster.json"
+    "ultraboost.mixins.json"
   ],
   "depends": {
-    "fabricloader": ">=0.16.9",
-    "minecraft": ">=1.21.4",
-    "java": ">=21",
+    "fabricloader": ">=0.15.0",
+    "minecraft": "1.20.1",
     "fabric-api": "*"
   }
 }
