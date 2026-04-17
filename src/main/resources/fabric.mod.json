@@ -2,11 +2,12 @@
   "schemaVersion": 1,
   "id": "minecraft-video-editor",
   "version": "${version}",
-  "name": "FPS Ultra Boost",
-  "description": "Optimized for mobile high FPS",
-  "authors": ["Sahil ZX"],
+  "name": "Smooth Video Editor",
+  "description": "Vulkan-style smoothness for 1.21.4 Mobile",
+  "authors": ["Twicefear"],
   "contact": {},
   "license": "MIT",
+  "icon": "assets/icon.png",
   "environment": "client",
   "entrypoints": {
     "client": [ "com.videoeditor.VideoEditorMod" ]
@@ -14,7 +15,8 @@
   "mixins": [ "videoeditor.mixins.json" ],
   "depends": {
     "fabricloader": ">=0.16.9",
-    "minecraft": "~1.21.4",
-    "java": ">=21"
+    "minecraft": "1.21.4",
+    "java": ">=21",
+    "fabric-api": "*"
   }
 }
