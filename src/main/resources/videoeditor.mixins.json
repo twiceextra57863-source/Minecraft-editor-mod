@@ -1,21 +1,11 @@
 {
   "required": true,
-  "minVersion": "0.8",
-  "package": "com.videoeditor.mixin",
-  "plugin": "com.videoeditor.mixin.VideoEditorMixinPlugin",
+  "package": "com.yourname.fpsbooster.mixins",
   "compatibilityLevel": "JAVA_21",
-  "mixins": [
-    "core.BufferBuilderMixin",
-    "world.LightingEngineMixin",
-    "world.ChunkUpdateMixin",
-    "entity.EntityCullingMixin",
-    "entity.FastEntityRendererMixin",
-    "entity.EntityBatchMixin",
-    "entity.OcclusionCullingMixin",
-    "entity.EntityActionSmoothnessMixin",
-    "video.MotionBlurMixin",
-    "util.MathOptimizationMixin",
-    "util.MemoryLeakMixin"
+  "client": [
+    "GameRendererMixin",
+    "WindowMixin",
+    "RenderSystemMixin"
   ],
   "injectors": {
     "defaultRequire": 1
