@@ -2,12 +2,22 @@
   "required": true,
   "minVersion": "0.8",
   "package": "com.videoeditor.mixin",
+  "plugin": "com.videoeditor.mixin.VideoEditorMixinPlugin",
   "compatibilityLevel": "JAVA_21",
   "mixins": [
-    "LightingOptimizationMixin",
-    "RenderSmoothnessMixin",
-    "EntityCullingMixin",
-    "ChunkUpdateMixin"
+    "VideoEditorMixinPlugin",
+    "core.RenderImmediateMixin",
+    "core.BufferBuilderMixin",
+    "world.LightingEngineMixin",
+    "world.ChunkUpdateMixin",
+    "entity.EntityCullingMixin",
+    "entity.FastEntityRendererMixin",
+    "util.MathOptimizationMixin",
+    "util.MemoryLeakMixin"
+  ],
+  "client": [
+    "core.RenderImmediateMixin",
+    "core.BufferBuilderMixin"
   ],
   "injectors": {
     "defaultRequire": 1
