@@ -1,5 +1,5 @@
 plugins {
-    id 'fabric-loom' version '1.7.4'  // Wapas 1.7.4 pe lao - ye 8.10.2 ke saath kaam karta hai
+    id 'fabric-loom' version '1.7.4'
     id 'maven-publish'
 }
 
@@ -16,13 +16,6 @@ repositories {
         url = "https://maven.fabricmc.net/"
     }
     mavenCentral()
-}
-
-loom {
-    // Minecraft 1.21.4 ke liye required
-    runConfigs.configureEach {
-        ideConfigGenerated = true
-    }
 }
 
 dependencies {
