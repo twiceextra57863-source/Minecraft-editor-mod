@@ -5,11 +5,9 @@
   "compatibilityLevel": "JAVA_21",
   "mixins": [
     "LightingOptimizationMixin",
-    "RenderSmoothnessMixin"
-  ],
-  "client": [
-    "LightingOptimizationMixin",
-    "RenderSmoothnessMixin"
+    "RenderSmoothnessMixin",
+    "EntityCullingMixin",
+    "ChunkUpdateMixin"
   ],
   "injectors": {
     "defaultRequire": 1
