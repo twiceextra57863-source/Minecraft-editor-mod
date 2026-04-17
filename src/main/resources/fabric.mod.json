@@ -1,23 +1,20 @@
 {
   "schemaVersion": 1,
-  "id": "videoeditor",
+  "id": "minecraft-video-editor",
   "version": "${version}",
-  "name": "Minecraft Video Editor",
-  "description": "A video editing mod for Minecraft",
-  "authors": ["Twicefear"],
+  "name": "FPS Ultra Boost",
+  "description": "Optimized for mobile high FPS",
+  "authors": ["Sahil ZX"],
   "contact": {},
   "license": "MIT",
-  "icon": "assets/videoeditor/icon.png",
   "environment": "client",
   "entrypoints": {
-    "client": [
-      "com.videoeditor.VideoEditorMod"
-    ]
+    "client": [ "com.videoeditor.VideoEditorMod" ]
   },
+  "mixins": [ "videoeditor.mixins.json" ],
   "depends": {
-    "fabricloader": ">=0.16.0",
+    "fabricloader": ">=0.16.9",
     "minecraft": "~1.21.4",
-    "java": ">=21",
-    "fabric-api": "*"
+    "java": ">=21"
   }
 }
