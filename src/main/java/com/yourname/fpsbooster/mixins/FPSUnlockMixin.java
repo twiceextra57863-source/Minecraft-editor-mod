@@ -13,9 +13,10 @@ public class FPSUnlockMixin {
     @Shadow
     private float lastFrameDuration;
     
-    @Inject(method = "beginRenderTick", at = @At("RETURN"), cancellable = true)
+    // Fixed method signature for 1.21.4
+    @Inject(method = "beginRenderTick", at = @At("RETURN"))
     private void unlockFPS(long timeNanos, CallbackInfoReturnable<Integer> cir) {
         // Remove FPS cap - achieve 400+ FPS
-        this.lastFrameDuration = 0.001F; // 1ms frame time = 1000 FPS possible
+        this.lastFrameDuration = 0.0025F; // 2.5ms = 400 FPS
     }
 }
