@@ -1,21 +1,25 @@
 {
   "schemaVersion": 1,
-  "id": "minecraft-video-editor",
+  "id": "fpsbooster",
   "version": "${version}",
-  "name": "Smooth Video Editor",
-  "description": "Vulkan-style smoothness for 1.21.4 Mobile",
-  "authors": ["Twicefear"],
+  "name": "FPS Booster Mod",
+  "description": "Unlock unlimited FPS and optimize Minecraft rendering for 400+ FPS on mobile/pc",
+  "authors": ["twicefear"],
   "contact": {},
   "license": "MIT",
-  "icon": "assets/icon.png",
+  "icon": "assets/fpsbooster/icon.png",
   "environment": "client",
   "entrypoints": {
-    "client": [ "com.videoeditor.VideoEditorMod" ]
+    "main": [
+      "com.yourname.fpsbooster.FPSBoosterMod"
+    ]
   },
-  "mixins": [ "videoeditor.mixins.json" ],
+  "mixins": [
+    "mixins.fpsbooster.json"
+  ],
   "depends": {
     "fabricloader": ">=0.16.9",
-    "minecraft": "1.21.4",
+    "minecraft": ">=1.21.4",
     "java": ">=21",
     "fabric-api": "*"
   }
