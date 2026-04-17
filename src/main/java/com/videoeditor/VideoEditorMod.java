@@ -5,10 +5,12 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class VideoEditorMod implements ClientModInitializer {
-    public static final Logger LOGGER = LoggerFactory.getLogger("fps-boost");
+    public static final String MOD_ID = "minecraft-video-editor";
+    public static final Logger LOGGER = LoggerFactory.getLogger(MOD_ID);
 
     @Override
     public void onInitializeClient() {
-        LOGGER.info("Mobile Optimization Mod Initialized for 1.21.4!");
+        LOGGER.info("Video Editor Smoothness Mod Loaded!");
+        // Yahan hum internal engine tweaks ko initialize karte hain
     }
 }
