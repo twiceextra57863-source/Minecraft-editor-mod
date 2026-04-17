@@ -1,0 +1,12 @@
+{
+  "required": true,
+  "package": "com.ultraboost.mixin",
+  "compatibilityLevel": "JAVA_21",
+  "mixins": [
+    "WorldRendererMixin",
+    "EntityRenderMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}
