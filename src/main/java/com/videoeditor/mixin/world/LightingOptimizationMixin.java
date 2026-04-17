@@ -1,4 +1,4 @@
-package com.videoeditor.mixin;
+package com.videoeditor.mixin.world;
 
 import net.minecraft.world.chunk.light.SkyLightStorage;
 import org.spongepowered.asm.mixin.Mixin;
