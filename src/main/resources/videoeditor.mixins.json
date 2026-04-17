@@ -4,7 +4,7 @@
   "package": "com.videoeditor.mixin",
   "plugin": "com.videoeditor.mixin.VideoEditorMixinPlugin",
   "compatibilityLevel": "JAVA_21",
-"mixins": [
+  "mixins": [
     "VideoEditorMixinPlugin",
     "core.BufferBuilderMixin",
     "world.LightingEngineMixin",
@@ -13,12 +13,10 @@
     "entity.FastEntityRendererMixin",
     "entity.EntityBatchMixin",
     "entity.OcclusionCullingMixin",
+    "entity.EntityActionSmoothnessMixin",
+    "video.MotionBlurMixin",
     "util.MathOptimizationMixin",
     "util.MemoryLeakMixin"
-],
-  "client": [
-    "core.RenderImmediateMixin",
-    "core.BufferBuilderMixin"
   ],
   "injectors": {
     "defaultRequire": 1
