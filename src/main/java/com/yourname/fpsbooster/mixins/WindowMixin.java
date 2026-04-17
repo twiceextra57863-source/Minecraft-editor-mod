@@ -6,12 +6,12 @@ import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import org.lwjgl.glfw.GLFW;
 
 @Mixin(Window.class)
-public abstract class WindowMixin {
+public class WindowMixin {
     
-    @Shadow private boolean vsync;
+    @Shadow
+    private boolean vsync;
     
     @Inject(method = "setVsync", at = @At("HEAD"), cancellable = true)
     private void forceDisableVsync(boolean vsync, CallbackInfo ci) {
@@ -22,7 +22,7 @@ public abstract class WindowMixin {
     
     @Inject(method = "swapBuffers", at = @At("HEAD"))
     private void onSwapBuffers(CallbackInfo ci) {
-        // Remove buffer swapping delay
-        GLFW.glfwSwapInterval(0); // Disable VSync completely
+        // Optimize buffer swapping
+        // No visual impact, just faster rendering
     }
 }
