@@ -7,12 +7,12 @@ extern "C" {
 
 JNIEXPORT void JNICALL
 Java_com_ultraboost_vulkan_VulkanBridge_initVulkan(JNIEnv* env, jclass clazz) {
-    LOGI("Vulkan Init Called");
+    LOGI("Vulkan initialized (stub)");
 }
 
 JNIEXPORT void JNICALL
 Java_com_ultraboost_vulkan_VulkanBridge_renderFrame(JNIEnv* env, jclass clazz) {
-    LOGI("Rendering Frame via Native Layer");
+    LOGI("Rendering frame (native layer)");
 }
 
 }
