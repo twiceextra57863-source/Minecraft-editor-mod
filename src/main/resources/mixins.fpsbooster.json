@@ -3,10 +3,10 @@
   "package": "com.yourname.fpsbooster.mixins",
   "compatibilityLevel": "JAVA_21",
   "client": [
-    "SmartRenderMixin",
+    "GameRendererMixin",
     "WindowMixin",
-    "BufferBuilderMixin",
-    "VertexFormatMixin"
+    "RenderTickCounterMixin",
+    "FPSUnlockMixin"
   ],
   "injectors": {
     "defaultRequire": 1
