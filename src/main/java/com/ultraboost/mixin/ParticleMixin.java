@@ -3,6 +3,8 @@ package com.ultraboost.mixin;
 import net.minecraft.client.particle.ParticleManager;
 import net.minecraft.client.particle.Particle;
 
+import com.ultraboost.system.SafeExecutor;
+
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -12,7 +14,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public class ParticleMixin {
 
     /**
-     * 🔥 PvP Particle Optimization
+     * 🔥 PvP + FPS Optimized Particle Handler (Crash Safe)
      */
     @Inject(
         method = "addParticle(Lnet/minecraft/client/particle/Particle;)V",
@@ -21,22 +23,18 @@ public class ParticleMixin {
     )
     private void onAddParticle(Particle particle, CallbackInfo ci) {
 
-        try {
+        SafeExecutor.run("ParticleMixin", () -> {
 
-            // ⚡ Remove most useless particles (balanced)
-            if (Math.random() > 0.35) { // ~65% removed
+            // 🔥 Reduce heavy particles (balanced)
+            if (Math.random() > 0.35) { // ~65% remove
                 ci.cancel();
                 return;
             }
 
-            // 🔥 Remove very short-lived particles (lag creators)
+            // ⚡ Remove useless short particles
             if (particle.getMaxAge() < 5) {
                 ci.cancel();
-                return;
             }
-
-        } catch (Throwable ignored) {
-            // Safety: never crash
-        }
+        });
     }
 }
