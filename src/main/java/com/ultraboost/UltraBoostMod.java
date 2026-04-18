@@ -4,6 +4,8 @@ import net.fabricmc.api.ModInitializer;
 
 import com.ultraboost.vulkan.VulkanBridge;
 import com.ultraboost.render.ChunkCleaner;
+import com.ultraboost.system.CrashHandler;
+import com.ultraboost.system.SafeExecutor;
 
 public class UltraBoostMod implements ModInitializer {
 
@@ -14,22 +16,24 @@ public class UltraBoostMod implements ModInitializer {
 
         System.out.println("[" + MOD_NAME + "] Initializing...");
 
-        // 🔥 Vulkan Init (Safe)
+        // 🛡️ Global Crash Protection
         try {
-            VulkanBridge.initVulkan();
-            System.out.println("[" + MOD_NAME + "] Vulkan initialized");
+            CrashHandler.init();
         } catch (Throwable t) {
-            System.out.println("[" + MOD_NAME + "] Vulkan init failed: " + t.getMessage());
+            System.out.println("[" + MOD_NAME + "] CrashHandler failed");
         }
 
-        // ⚡ Start Background Optimization Thread
+        // 🔥 Vulkan Init (Safe)
+        SafeExecutor.run("VulkanInit", VulkanBridge::initSafe);
+
+        // ⚡ Start Background Systems
         startCleanerThread();
 
         System.out.println("[" + MOD_NAME + "] Loaded Successfully!");
     }
 
     /**
-     * 🔄 Chunk Cache Cleaner Thread
+     * 🔄 Background Optimization Thread
      */
     private void startCleanerThread() {
 
@@ -37,15 +41,16 @@ public class UltraBoostMod implements ModInitializer {
 
             while (true) {
                 try {
-                    // Run cleaner logic
+                    // 🧠 Chunk cleanup (memory + performance)
                     ChunkCleaner.tick();
 
-                    // Sleep to reduce CPU usage
+                    // reduce CPU usage
                     Thread.sleep(1000);
 
                 } catch (InterruptedException e) {
-                    System.out.println("[" + MOD_NAME + "] Cleaner thread interrupted");
+                    System.out.println("[" + MOD_NAME + "] Cleaner stopped");
                     break;
+
                 } catch (Throwable t) {
                     System.out.println("[" + MOD_NAME + "] Cleaner error: " + t.getMessage());
                 }
@@ -54,7 +59,7 @@ public class UltraBoostMod implements ModInitializer {
         });
 
         cleanerThread.setName("UltraBoost-Cleaner");
-        cleanerThread.setDaemon(true); // stops with game
+        cleanerThread.setDaemon(true);
         cleanerThread.start();
     }
 }
