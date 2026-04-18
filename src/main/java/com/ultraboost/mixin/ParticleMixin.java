@@ -12,27 +12,31 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public class ParticleMixin {
 
     /**
-     * Reduce heavy particles (crit, explosion, etc.)
+     * 🔥 PvP Particle Optimization
      */
-    @Inject(method = "addParticle(Lnet/minecraft/client/particle/Particle;)V",
-            at = @At("HEAD"),
-            cancellable = true)
+    @Inject(
+        method = "addParticle(Lnet/minecraft/client/particle/Particle;)V",
+        at = @At("HEAD"),
+        cancellable = true
+    )
     private void onAddParticle(Particle particle, CallbackInfo ci) {
 
         try {
-            // 🔥 Random reduction (balanced, not full remove)
-            if (Math.random() > 0.4) { // 60% particles removed
+
+            // ⚡ Remove most useless particles (balanced)
+            if (Math.random() > 0.35) { // ~65% removed
                 ci.cancel();
                 return;
             }
 
-            // ⚡ Extra protection: very short-lived particles skip
+            // 🔥 Remove very short-lived particles (lag creators)
             if (particle.getMaxAge() < 5) {
                 ci.cancel();
+                return;
             }
 
         } catch (Throwable ignored) {
-            // Safety: kabhi crash nahi hone dena
+            // Safety: never crash
         }
     }
 }
